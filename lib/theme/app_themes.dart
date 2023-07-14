@@ -32,9 +32,9 @@ final List<ThemeData> appThemeData = [
         inverseSurface: Colors.black),
   ),
   ThemeData(
-      colorScheme:
-          ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 102, 86, 36))
-              .copyWith(onError: Colors.black)),
+      colorScheme: ColorScheme.fromSeed(
+              seedColor: const Color.fromARGB(255, 102, 86, 36))
+          .copyWith(onError: Colors.black)),
   ThemeData(
       colorScheme: const ColorScheme.dark(
           inversePrimary: Colors.black,

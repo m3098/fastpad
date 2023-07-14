@@ -95,9 +95,17 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
         notes[event.id].isLock = !notes[event.id].isLock;
         Hive.box<NoteModel>("notes").clear();
 
-        for (var element in notes) {
-          Hive.box<NoteModel>("notes").add(element);
-        }
+        notes.sort((a, b) {
+          if (a.isLock && !b.isLock) {
+            return -1; // Перемещаем a в начало списка
+          } else if (!a.isLock && b.isLock) {
+            return 1; // Перемещаем b в начало списка
+          } else {
+            return 0; // Оставляем a и b в текущем порядке
+          }
+        });
+
+        Hive.box<NoteModel>("notes").addAll(notes);
       }
 
       emit(NotesInitial(
